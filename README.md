@@ -1,6 +1,6 @@
 # Azure RAG Chatbot – Document Question Answering
 
-**A Retrieval-Augmented Generation (RAG) chatbot for answering queries using private enterprise documents, built with Azure AI, OpenAI LLMs, and modern semantic search.**
+**A Retrieval-Augmented Generation (RAG) chatbot for answering queries using private enterprise documents, built with Azure AI Search, OpenAI LLMs, and modern semantic search.**
 
 ---
 
@@ -8,8 +8,8 @@
 
 This project demonstrates how to build a production-grade chatbot that answers questions using your own documents—**not just generic internet knowledge**.
 
-* **Extraction:** Uses Azure Document Intelligence to parse text from PDFs and enterprise files.
-* **Embedding & Indexing:** Chunks are embedded via OpenAI models and indexed using Azure Cognitive Search or FAISS.
+* **Extraction:** Assumes documents are pre-processed and text is available for ingestion.
+* **Embedding & Indexing:** Text chunks are embedded using OpenAI models and indexed using **Azure Cognitive Search**.
 * **Semantic Retrieval:** On a user query, the system retrieves top-matching document passages using vector similarity.
 * **LLM Answering:** Retrieved passages + user query are passed to GPT-4 (Azure OpenAI), which generates a **grounded, context-aware answer**.
 * **Transparency:** Returns the final answer along with references to the underlying documents.
@@ -19,17 +19,16 @@ This project demonstrates how to build a production-grade chatbot that answers q
 ## 🧠 How It Works (High Level)
 
 1. **Ingestion:**
-   Upload your PDF/documents to Azure Blob Storage.
+   Upload your pre-processed text documents to the system (documents must be plain text or already extracted).
 
 2. **Processing:**
 
-   * Text and layout are extracted using Azure AI Document Intelligence.
-   * Extracted text is split into manageable “chunks.”
+   * Text is split into manageable “chunks.”
 
 3. **Embedding & Indexing:**
 
    * Each chunk is embedded into a vector using OpenAI embeddings (text-embedding-ada-002).
-   * All vectors are indexed using either Azure Cognitive Search (production) or FAISS (dev).
+   * All vectors are indexed using **Azure Cognitive Search**.
 
 4. **Question Answering:**
 
@@ -44,8 +43,7 @@ This project demonstrates how to build a production-grade chatbot that answers q
 ## 🛠️ Technologies Used
 
 * **Azure OpenAI (GPT-4, Embeddings)**
-* **Azure Cognitive Search / FAISS**
-* **Azure Document Intelligence**
+* **Azure Cognitive Search**
 * **Python, FastAPI (API)**
 * **Streamlit or React (for demo UI)**
 * **Azure Blob Storage**
